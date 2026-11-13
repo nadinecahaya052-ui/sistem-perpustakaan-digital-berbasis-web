@@ -1,0 +1,46 @@
+PANDUAN PERUBAHAN - PERPUSTAKAAN SMA NEGERI 1 KAMAL
+
+Perubahan:
+1. Nama Kelompok 3 diganti menjadi SMA NEGERI 1 KAMAL pada identitas utama.
+2. Pencarian buku admin dan publik mendukung judul, pengarang/penulis, ISBN, penerbit dan kata kunci.
+3. Pengurutan buku: terbaru, judul A-Z, stok terbanyak.
+4. Cover di halaman Stok Buku admin diperkecil menjadi rasio 3:4.
+5. Data anggota admin dapat dicari dan difilter berdasarkan kelas dan jurusan, serta diurutkan alfabet, NISN, kelas, atau jurusan.
+6. Cetak kartu anggota admin: enam kartu per lembar A4 (2 kolom x 3 baris), mengikuti filter yang dipilih.
+7. Siswa yang login dapat membuka Profil > Cetak Kartu Anggota untuk mencetak kartu miliknya sendiri.
+8. Kartu menggunakan barcode CODE128 dengan kode anggota unik: SMP2KAMAL-ID-NISN.
+9. Admin dapat membuka menu Data Anggota > Scan Kartu untuk memindai barcode menggunakan kamera atau scanner USB.
+
+PENTING UNTUK PENGGUNAAN:
+- Impor database/database.sql pada phpMyAdmin seperti instalasi sebelumnya. Perubahan ini tidak menambah kolom database.
+- Atur koneksi database di koneksi.php sesuai nama database dan kredensial server.
+- Untuk scan melalui kamera, jalankan di localhost atau HTTPS dan izinkan akses kamera browser.
+- Pembuatan barcode dan pembacaan kamera menggunakan pustaka CDN, sehingga browser memerlukan koneksi internet saat membuka halaman cetak/scan.
+- Uji cetak menggunakan kertas A4, skala 100% / Actual Size, margin default/none sesuai printer. Pastikan opsi background graphics aktif agar kartu berwarna hijau tercetak.
+- Jumlah anggota 30.000 tidak mengubah tata letak: sistem membagi otomatis enam kartu per halaman, jadi sekitar 5.000 lembar jika semua anggota dicetak sekaligus. Cetak per kelas/jurusan lebih disarankan.
+
+
+PERBAIKAN KARTU PELAJAR (4 NOVEMBER 2026)
+- Cetak kartu admin dan kartu siswa mengikuti contoh: header biru muda, identitas sekolah, foto, data anggota, dan footer.
+- Cetak kartu admin disusun 6 kartu per halaman A4 (2 kolom x 3 baris).
+- Barcode dan pemanggilan pustaka JsBarcode/CDN di halaman kartu siswa dihapus. Kartu cetak tidak membutuhkan pustaka JavaScript eksternal.
+- Foto siswa memakai pemeriksaan file lokal dan gambar cadangan default.png jika foto tidak tersedia, agar tidak memunculkan tautan foto rusak.
+
+
+PERUBAHAN 10 NOVEMBER 2026 - SMA NEGERI 1 KAMAL
+- Nama sekolah diganti menjadi SMA NEGERI 1 KAMAL di seluruh halaman (judul, sidebar, navbar, login, footer, kartu).
+- Kode barcode kartu kini berformat SMP2KAMAL-ID-NISN (lookup_barcode.php sudah disesuaikan).
+- Menu CETAK > Cetak Kartu Anggota (admin/kartu_anggota.php) kini berupa halaman pencarian:
+  * Cari berdasarkan Nama, NISN, atau No. Anggota.
+  * Filter Kelas dan Jurusan; urutkan Nama / NISN / No. Anggota, atau kelompokkan per kelas / per jurusan.
+  * Centang siswa lalu klik "Cetak Kartu yang Dipilih", atau "Cetak Semua Hasil" untuk seluruh hasil filter.
+  * Tombol "Cetak Kartu" di tiap baris untuk mencetak satu siswa.
+  * Setiap kartu memuat No. Anggota (6 digit) sesuai nama siswanya, 6 kartu per lembar A4.
+- Nama database tetap perpustakaan_digital_kelompok3 supaya koneksi.php dan database yang sudah diimpor tidak rusak.
+
+PERUBAHAN PENCARIAN BUKU (10 NOVEMBER 2026)
+- Data Buku (admin/buku.php): ditambah filter Kategori, Jenis, dan urutan Terbaru / Judul A-Z / Stok terbanyak; hasil mengikuti pilihan otomatis.
+- Cari Buku admin (admin/cari_buku.php): ditambah filter Jenis; pilihan langsung menerapkan hasil (urutan Judul A-Z & Stok terbanyak).
+- Cari Buku publik/siswa (cari.php): urutan Stok terbanyak kini memakai Judul A-Z sebagai urutan kedua agar halaman stabil.
+- Beranda (index.php): pencarian & kartu kategori memakai filter Jenis Buku (sebelumnya salah terkirim sebagai Kategori sehingga hasil tidak nyambung).
+- Form Peminjaman siswa (peminjaman_siswa.php): ditambah filter Kategori dan urutan Judul A-Z / Stok terbanyak.
